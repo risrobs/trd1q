@@ -1,12 +1,24 @@
-import Footer from "../components/Footer";
-import Scene from "./Scene";
+import { Sprite, Texture } from 'pixi.js';
+import Scene from './Scene';
+import gsap from 'gsap';
+import Footer from '../components/Footer';
+import Fish from '../components/Fish';
 
 export default class Play extends Scene {
+  
+  
   async onCreated() {
+
     const footer = new Footer();
-    footer.x = -window.innerWidth / 2;
+    footer.x = - window.innerWidth / 2;
     footer.y = window.innerHeight / 2 - footer.height;
-    this.addChild(footer);
+    this.addChild(footer)
+
+    const texture = new Texture.from('smallFish');
+    const fish = new Fish(texture);
+    fish.on('click', () => fish.expand());
+    this.addChild(fish);
+
   }
 
   /**
@@ -16,7 +28,7 @@ export default class Play extends Scene {
    * @param  {Number} width  Window width
    * @param  {Number} height Window height
    */
-  onResize(width, height) {
-    // eslint-disable-line no-unused-vars
+  onResize(width, height) { // eslint-disable-line no-unused-vars
+
   }
 }
